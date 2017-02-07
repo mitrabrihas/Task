@@ -1,0 +1,68 @@
+<h2 style="text-align:center">Timeline of {{userSelected}}</h2>
+
+<div class="tweetListContainer">
+    <ol>
+        <li class="eachTweetContainer" ng-repeat="tweet in tweets">
+
+            <div class="tweetIconContainer">
+
+                <img class="tweetIcon" ng-src="{{tweet.user.profile_image_url}}" alt="" />
+
+            </div>
+            <div class="userInfo">
+                <strong>{{tweet.user.name}} </strong><span class="screenName">@{{tweet.user.screen_name}}</span>
+            </div>
+            <div class="tweetMsgDiv">
+                <p class="tweetMsg">{{tweet.text|tweetText}}</p>
+            </div>
+
+            <div class="tweetImgDiv" ng-show="{{tweet.extended_entities.media.length>0}}">
+                <img class="tweetImg" ng-src="{{tweet.extended_entities.media[0].media_url_https}}">
+            </div>
+            <div class="tweetBottmom">
+                <span class="reply">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                </span>
+                <span class="heart">
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                      <span>{{tweet.favorite_count}}</span>
+                </span>
+                <span class="retweet">
+                  <i class="fa fa-retweet" aria-hidden="true"></i>
+                  <span>{{tweet.retweet_count}}</span>
+                </span>
+                <span class="ellipsis">
+                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                   </span>
+            </div>
+
+
+        </li>
+        <li>
+
+        </li>
+    </ol>
+
+</div>
+
+<div ng-if="showComposeDiv">
+
+    <input type="button" value="Compose a tweet" ng-click="openDiv()">
+    <br>
+    <label for="">Note: you can compose the tweet to the acccount if you have set your app in twitter</label>
+    <br>
+
+    <input type="text" ng-model="tweetDetails.tweetText" ng-if="openDivBool">
+    <input type="button" value="Submit" ng-click="composeTweet(tweetDetails.tweetText)" ng-if="openDivBool">
+    <br>
+
+    <label ng-if="msgVisible">Could not compose the tweet..!! Please try again</label>
+    <label ng-if="tweetSuccess">Congratulations!!, you have successfully posted a tweet on twitter!!</label>
+
+</div>
+<br>
+<br>
+
+<div ng-if="showComposeDiv">
+  <input type="button" value="Select a different user" ng-click="showUsersList()">
+</div>
